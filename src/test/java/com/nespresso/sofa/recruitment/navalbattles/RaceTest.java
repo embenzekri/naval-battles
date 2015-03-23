@@ -5,14 +5,13 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-// 18h10
 public class RaceTest {
 
     // Speed of a ship is its displacement divided by number of mast: the lower the value, the faster the ship
     @Test
-    public void fastestShouldWin() {  //18h16
+    public void fastestShouldWin() {
 
-        Ship a = new Ship(20000, 2);
+        Ship a = new Ship(20000, 2); // 20000 tons of displacement, 2 masts
         Ship b = new Ship(7500, 1);
 
         Race race = new Race(a, b);
@@ -21,7 +20,7 @@ public class RaceTest {
 
     // a clipper goes 20% faster than a standard ship.
     @Test
-    public void clipperGoesFaster() { // 18h 24
+    public void clipperGoesFaster() {
 
         Ship a = new Ship(20000, 2);
         Ship b = new Ship(7500, 1);
@@ -34,9 +33,9 @@ public class RaceTest {
 
     // any ship can carry cannons, each cannons grant 0.5% cumulative penalty to speed
     @Test
-    public void armedShipAreUsuallySlower() { // 18h30
+    public void armedShipAreUsuallySlower() {
 
-        Ship a = new Ship(7800, 1, 16);
+        Ship a = new Ship(7800, 1, 16);  // 7800 tons of displacement, 1 masts, 16 cannons
         Ship b = new Ship(8000, 1);
 
         Race race = new Race(a, b);

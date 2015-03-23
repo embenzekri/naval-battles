@@ -21,25 +21,26 @@ public class BattleTest {
     @Test
     public void fight() {
         Ship a = new Ship(7500, 1, 16);
-        Ship b = new Ship(10000, 1, 16);
+        Ship b = new Ship(12000, 1, 16);
 
         Battle battle = new Battle().side(a).against(b);
         assertThat(battle.isInTheWinningSide(b)).isTrue();
     }
 
     // when the battle is not even in terms of number of ship
-    // each ship of the outnumbering team gains an 15 % bonus to it's damages
-    // each ship always target the same opponent until it's sunk (once sunk it can not participate to the fight anymore)
-
+    // each ship of the outnumbering team gains an 15 % bonus per additional ship to it's damages.
+    // each ship always target the same opponent until it's sunk (once sunk it can not participate to the fight anymore, nor count for the presence & calculation of the bonus)
     @Test
     public void packfight() {
-        Ship a = new Ship(60000, 3, 64);
-        Ship b = new Ship(15000, 1, 16);
-        Ship c = new Ship(15000, 1, 16);
-        Ship d = new Ship(15000, 1, 16);
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(23000, 1, 24);
+        Ship c = new Ship(23000, 1, 24);
+        Ship d = new Ship(23000, 1, 24);
 
         Battle battle = new Battle().side(a).against(b, c, d);
         assertThat(battle.isInTheWinningSide(b)).isTrue();
+        assertThat(battle.isInTheWinningSide(c)).isTrue();
+        assertThat(battle.isInTheWinningSide(d)).isTrue();
     }
 
 

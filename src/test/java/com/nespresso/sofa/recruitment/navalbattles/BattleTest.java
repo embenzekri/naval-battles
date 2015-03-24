@@ -17,6 +17,7 @@ public class BattleTest {
 
     // this is a global fight, damages are not localized, nor impact dynamically ship statistics
     // fight last until one side is sunk
+    // damages happens simultaneously
 
     @Test
     public void fight() {
@@ -44,33 +45,35 @@ public class BattleTest {
     }
 
 
+    // this one comes for free as control group for next one :D
+    @Test
+    public void packfightLightBoat() {
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(15000, 1, 24);
+        Ship c = new Ship(15000, 1, 24);
+        Ship d = new Ship(15000, 1, 24);
+
+        Battle battle = new Battle().side(a).against(b, c, d);
+        assertThat(battle.isInTheWinningSide(a)).isTrue();
+    }
+
     // damages are now localized and a applied in this order :
     // first mast are destroyed, then cannon, then the hull
     // destroyed part of the ship changes it's characteristics :
     // a destroyed mast reduce overall ship speed
     // a destroyed canon can not fire anymore thus it's ship does less damages
     // a full destroyed hull means the ship has sunk
-
     @Test
-    public void fightWithLocalizedDamages() {
-        Ship a = new Ship(7500, 1, 16);
-        Ship b = new Ship(10000, 1, 16);
+    public void packfightLightBoatLocalized() {
+        Ship a = new Ship(65000, 3, 64);
+        Ship b = new Ship(23000, 1, 24);
+        Ship c = new Ship(23000, 1, 24);
+        Ship d = new Ship(23000, 1, 24);
 
-        Battle battle = new Battle(LOCALIZED_DAMAGES).side(a).against(b);
+        Battle battle = new Battle(LOCALIZED_DAMAGES).side(a).against(b, c, d);
         assertThat(battle.isInTheWinningSide(b)).isTrue();
+        assertThat(battle.isInTheWinningSide(c)).isTrue();
+        assertThat(battle.isInTheWinningSide(d)).isTrue();
     }
-
-
-    // if a ship speed is 50% higher that it's target it can shoot twice each rounds
-
-    @Test
-    public void fightWithLocalizedDamagesAndSpeed() {
-        Ship a = new Ship(7500, 3, 16);
-        Ship b = new Ship(10000, 1, 16);
-
-        Battle battle = new Battle(LOCALIZED_DAMAGES).side(a).against(b);
-        assertThat(battle.isInTheWinningSide(a)).isTrue();
-    }
-
 
 }

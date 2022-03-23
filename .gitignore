@@ -1,4 +1,6 @@
 **/.idea
 **/*.iml
-src/main/java/*
 **/target
+/target/
+*.project
+*.prefs

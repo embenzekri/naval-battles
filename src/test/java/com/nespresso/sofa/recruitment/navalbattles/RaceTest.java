@@ -1,8 +1,11 @@
 package com.nespresso.sofa.recruitment.navalbattles;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import com.nespresso.sofa.recruitment.navalbattles.ship.Clipper;
+import com.nespresso.sofa.recruitment.navalbattles.ship.Ship;
 
 
 public class RaceTest {
@@ -14,24 +17,24 @@ public class RaceTest {
         Ship a = new Ship(20000, 2); // 20000 tons of displacement, 2 masts
         Ship b = new Ship(7500, 1);
 
-        Race race = new Race(a, b);
+        Race race = new Race(a, b);  
         assertThat(race.winner()).isEqualTo(b);
     }
 
-    // a clipper goes 20% faster than a standard ship.
+     //a clipper goes 20% faster than a standard ship.
     @Test
     public void clipperGoesFaster() {
 
         Ship a = new Ship(20000, 2);
         Ship b = new Ship(7500, 1);
         Clipper c = new Clipper(18000, 2);
-
+        System.out.println(a+ " "+b+" "+c);
         Race race = new Race(a, b, c);
         assertThat(race.winner()).isEqualTo(c);
     }
 
 
-    // any ship can carry cannons, each cannons grant 0.5% cumulative penalty to speed
+//    // any ship can carry cannons, each cannons grant 0.5% cumulative penalty to speed
     @Test
     public void armedShipAreUsuallySlower() {
 
